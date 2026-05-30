@@ -1,0 +1,7 @@
+Scape room, donde necesitas dormir para soñar y encontrar las respuestas de los puzzles para escapar
+
+Personaje recurrente en los sueños: Persona (morra) que nos ayuda a encontrar las respuestas (Sprite)
+
+Dos escenas:
+> Espacio real
+> Mundo onírico

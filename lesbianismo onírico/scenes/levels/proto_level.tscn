@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dxo3ilfgjx5dx"]
+
+[ext_resource type="Script" uid="uid://c1b11kwi63lv0" path="res://scripts/pause_handler.gd" id="1_m6160"]
+[ext_resource type="PackedScene" uid="uid://b7dk6evx4s7b1" path="res://scenes/player/lesbian.tscn" id="2_o3vtb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_m6160"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o3vtb"]
+size = Vector3(4.9515686, 0.083618164, 5.0048523)
+
+[node name="Proto level" type="Node" unique_id=781541328]
+
+[node name="pause handler" type="Node" parent="." unique_id=213247962 node_paths=PackedStringArray("player")]
+process_mode = 3
+script = ExtResource("1_m6160")
+player = NodePath("../Lesbian")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1467795767]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="StaticBody3D" unique_id=1330039862]
+transform = Transform3D(5, 0, 0, 0, 0.1, 0, 0, 0, 5, 0, 0, 0)
+mesh = SubResource("BoxMesh_m6160")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=650239333]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018936157, 0.0079956055, -0.006088257)
+shape = SubResource("BoxShape3D_o3vtb")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=941001215]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4707055, 0.09947407, 0)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="StaticBody3D2" unique_id=1515939868]
+transform = Transform3D(5, 0, 0, 0, 0.1, 0, 0, 0, 5, 0, 0, 0)
+mesh = SubResource("BoxMesh_m6160")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=1034144735]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018936157, 0.0079956055, -0.006088257)
+shape = SubResource("BoxShape3D_o3vtb")
+
+[node name="Lesbian" parent="." unique_id=484234173 instance=ExtResource("2_o3vtb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.93012434, 1.0498046, -1.073791)

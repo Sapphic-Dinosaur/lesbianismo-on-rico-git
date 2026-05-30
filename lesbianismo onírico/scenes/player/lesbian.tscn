@@ -10,13 +10,16 @@
 script = ExtResource("1_5bhsc")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=2129475475]
+layers = 2
 mesh = SubResource("CapsuleMesh_cdiss")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=901242159]
 shape = SubResource("CapsuleShape3D_5bhsc")
 
 [node name="Yaw" type="Marker3D" parent="." unique_id=1951655348]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5621003, 0)
 
 [node name="Pitch" type="Marker3D" parent="Yaw" unique_id=1819662262]
 
 [node name="Camera3D" type="Camera3D" parent="Yaw/Pitch" unique_id=2025003705]
+cull_mask = 1048573
