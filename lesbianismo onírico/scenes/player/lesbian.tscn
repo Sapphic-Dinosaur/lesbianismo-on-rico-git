@@ -6,6 +6,9 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5bhsc"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_5bhsc"]
+radius = 0.696157
+
 [node name="Lesbian" type="CharacterBody3D" unique_id=484234173]
 script = ExtResource("1_5bhsc")
 
@@ -23,3 +26,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5621003, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Yaw/Pitch" unique_id=2025003705]
 cull_mask = 1048573
+
+[node name="InteractionBox" type="Area3D" parent="Yaw/Pitch" unique_id=1925905359]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Yaw/Pitch/InteractionBox" unique_id=796478618]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6272516)
+shape = SubResource("SphereShape3D_5bhsc")
+debug_color = Color(0.6005939, 0.543645, 1.92523e-07, 0.41960785)
+
+[connection signal="area_entered" from="Yaw/Pitch/InteractionBox" to="." method="_on_interaction_box_area_entered"]
+[connection signal="area_exited" from="Yaw/Pitch/InteractionBox" to="." method="_on_interaction_box_area_exited"]

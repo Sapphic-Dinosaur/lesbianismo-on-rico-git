@@ -8,7 +8,36 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_o3vtb"]
 size = Vector3(4.9515686, 0.083618164, 5.0048523)
 
+[sub_resource type="BoxMesh" id="BoxMesh_o3vtb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o3vtb"]
+albedo_color = Color(0.16470589, 1, 0.16078432, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0pugu"]
+size = Vector3(0.4008789, 0.4257202, 0.39154053)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7ic40"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o3vtb"]
+size = Vector2(30, 50)
+
 [node name="Proto level" type="Node" unique_id=781541328]
+
+[node name="Label" type="Label" parent="." unique_id=1182705079]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -175.0
+offset_top = -55.0
+offset_right = 175.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "Press E to interact"
+horizontal_alignment = 3
 
 [node name="pause handler" type="Node" parent="." unique_id=213247962 node_paths=PackedStringArray("player")]
 process_mode = 3
@@ -36,5 +65,128 @@ mesh = SubResource("BoxMesh_m6160")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018936157, 0.0079956055, -0.006088257)
 shape = SubResource("BoxShape3D_o3vtb")
 
-[node name="Lesbian" parent="." unique_id=484234173 instance=ExtResource("2_o3vtb")]
+[node name="Lesbian" parent="." unique_id=484234173 node_paths=PackedStringArray("interactText") instance=ExtResource("2_o3vtb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.93012434, 1.0498046, -1.073791)
+interactText = NodePath("../Label")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="." unique_id=939252039]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1627007, 1.7696536, 0)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="StaticBody3D3" unique_id=1142598925]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+mesh = SubResource("BoxMesh_o3vtb")
+material = SubResource("StandardMaterial3D_o3vtb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3" unique_id=238665110]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010009766, -0.0030212402, 0.0027770996)
+shape = SubResource("BoxShape3D_0pugu")
+
+[node name="InteractionBox" type="Area3D" parent="StaticBody3D3" unique_id=578672226]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3/InteractionBox" unique_id=17681080]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.53398275, 0.050341845, 0)
+shape = SubResource("SphereShape3D_7ic40")
+debug_color = Color(0.6671387, 0.51128393, 3.85046e-07, 0.41960785)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="StaticBody3D3/InteractionBox" unique_id=394404234]
+
+[node name="Control" type="Control" parent="StaticBody3D3/InteractionBox/CanvasLayer" unique_id=1666561016]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StaticBody3D3/InteractionBox/CanvasLayer/Control" unique_id=696747202]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -81.5
+offset_right = 31.0
+offset_bottom = 81.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="StaticBody3D3/InteractionBox/CanvasLayer/Control/VBoxContainer" unique_id=530376021]
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "000"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="StaticBody3D3/InteractionBox/CanvasLayer/Control/VBoxContainer" unique_id=1315289906]
+layout_mode = 2
+columns = 3
+
+[node name="Button7" type="Button" parent="StaticBody3D3/InteractionBox/CanvasLayer/Control/VBoxContainer/GridContainer" unique_id=823279318]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "7"
+
+[node name="Button8" type="Button" parent="StaticBody3D3/InteractionBox/CanvasLayer/Control/VBoxContainer/GridContainer" unique_id=615625297]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "8"
+
+[node name="Button9" type="Button" parent="StaticBody3D3/InteractionBox/CanvasLayer/Control/VBoxContainer/GridContainer" unique_id=1520518373]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "9"
+
+[node name="Button4" type="Button" parent="StaticBody3D3/InteractionBox/CanvasLayer/Control/VBoxContainer/GridContainer" unique_id=919521281]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "4"
+
+[node name="Button5" type="Button" parent="StaticBody3D3/InteractionBox/CanvasLayer/Control/VBoxContainer/GridContainer" unique_id=115947127]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "5"
+
+[node name="Button6" type="Button" parent="StaticBody3D3/InteractionBox/CanvasLayer/Control/VBoxContainer/GridContainer" unique_id=1668534089]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "6"
+
+[node name="Button1" type="Button" parent="StaticBody3D3/InteractionBox/CanvasLayer/Control/VBoxContainer/GridContainer" unique_id=1330453766]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "1"
+
+[node name="Button2" type="Button" parent="StaticBody3D3/InteractionBox/CanvasLayer/Control/VBoxContainer/GridContainer" unique_id=1805933051]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "2"
+
+[node name="Button3" type="Button" parent="StaticBody3D3/InteractionBox/CanvasLayer/Control/VBoxContainer/GridContainer" unique_id=520695453]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "3"
+
+[node name="Panel" type="Panel" parent="StaticBody3D3/InteractionBox/CanvasLayer/Control/VBoxContainer/GridContainer" unique_id=1703411375]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="Button0" type="Button" parent="StaticBody3D3/InteractionBox/CanvasLayer/Control/VBoxContainer/GridContainer" unique_id=2143369752]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "0
+"
+
+[node name="Button10" type="Button" parent="StaticBody3D3/InteractionBox/CanvasLayer/Control/VBoxContainer/GridContainer" unique_id=1127754800]
+layout_mode = 2
+text = "
+"
+icon = SubResource("PlaceholderTexture2D_o3vtb")
+icon_alignment = 1
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1425765816]
+transform = Transform3D(0.7273776, 0.42716473, -0.5370774, 0, 0.78264076, 0.62247366, 0.68623745, -0.4527734, 0.5692753, 0, 5.128899, 4.4034033)

@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Nuevo Proyecto de Juego"
+config/name="lesbianas oniricas"
 run/main_scene="uid://dxo3ilfgjx5dx"
 config/features=PackedStringArray("4.6", "Mobile")
 
@@ -63,6 +63,10 @@ play_jump={
 
 3d_render/layer_1="Solid"
 3d_render/layer_2="Player"
+3d_physics/layer_1="Ground"
+3d_physics/layer_2="Player"
+3d_physics/layer_3="Usables"
+3d_physics/layer_4="PlayerInteraction"
 
 [physics]
 

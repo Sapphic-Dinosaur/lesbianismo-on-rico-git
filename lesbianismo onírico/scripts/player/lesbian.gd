@@ -4,6 +4,7 @@ class_name Player
 @onready var yaw: Marker3D = $Yaw
 @onready var pitch: Marker3D = $Yaw/Pitch
 
+@export var interactText: Label
 @export var cam_sense: float = 1.0
 
 const SPEED = 5.0
@@ -39,3 +40,13 @@ func _unhandled_input(event: InputEvent):
 func _capture_mouse(pause: bool):
 	if !pause: Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	else: Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
+func _on_interaction_box_area_entered(area: Area3D) -> void:
+	print("Now you can interact")
+	interactText.visible = true
+
+
+func _on_interaction_box_area_exited(area: Area3D) -> void:
+	print("Now you can NOT interact")
+	interactText.visible = false
