@@ -7,11 +7,15 @@ class_name Player
 @export var interactText: Label
 @export var cam_sense: float = 1.0
 
+var possible_interaction: Interaction_box = null
+var player_interacting: bool
+
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	player_interacting = false
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -20,7 +24,9 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("play_jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-	_movement()
+	#Movement. Player can only move if they're not in the midle of an interaction.
+	if !player_interacting: _movement()
+	_interaction()
 	move_and_slide()
 
 func _movement():
@@ -30,6 +36,17 @@ func _movement():
 	direction.z = abs(direction.z) * direction.z
 	if direction: velocity = Vector3(direction.x * SPEED, velocity.y, direction.z * SPEED)
 	else: velocity = Vector3(0, velocity.y, 0)
+
+func _interaction():
+	if Input.is_action_just_pressed("play_interact") and possible_interaction and !player_interacting:
+		print("Yea")
+		possible_interaction.display.visible = true
+		player_interacting = true
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	elif Input.is_action_just_pressed("play_confirm") and player_interacting:
+		possible_interaction.display.visible = false
+		player_interacting = false
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _unhandled_input(event: InputEvent):
 	if event is InputEventMouseMotion:
@@ -42,11 +59,11 @@ func _capture_mouse(pause: bool):
 	else: Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
-func _on_interaction_box_area_entered(area: Area3D) -> void:
-	print("Now you can interact")
+func _on_interaction_box_area_entered(area: Interaction_box) -> void:
 	interactText.visible = true
+	possible_interaction = area
 
 
-func _on_interaction_box_area_exited(area: Area3D) -> void:
-	print("Now you can NOT interact")
+func _on_interaction_box_area_exited(area: Interaction_box) -> void:
 	interactText.visible = false
+	possible_interaction = null
