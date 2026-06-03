@@ -68,6 +68,7 @@ play_jump={
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Usables"
 3d_physics/layer_4="PlayerInteraction"
+3d_physics/layer_5="Hazzards"
 
 [physics]
 

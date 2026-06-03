@@ -1,6 +1,10 @@
 extends Interaction_object
 
 @export var result: Label
+@export var player: Player
+@export var interaction_box: Interaction_box
+@export var panel_cube: CSGMesh3D
+
 var writen_nums: int
 
 func _ready() -> void:
@@ -46,5 +50,8 @@ func interaction_confirmed():
 func _check_result() -> void:
 	if result.text == "451":
 		result.text = "000"
-		print("Done")
+		print("Numpad Done")
+		interaction_box.puzzle_finished = true
+		panel_cube.material.albedo_color = Color(0.0, 0.667, 0.209, 1.0)
 	else: result.text = "000"
+	player.exit_interaction()

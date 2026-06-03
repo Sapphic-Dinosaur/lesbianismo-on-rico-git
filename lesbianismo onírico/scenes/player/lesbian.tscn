@@ -9,8 +9,11 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_5bhsc"]
 radius = 0.696157
 
-[node name="Lesbian" type="CharacterBody3D" unique_id=484234173]
+[sub_resource type="BoxShape3D" id="BoxShape3D_5bhsc"]
+
+[node name="Lesbian" type="CharacterBody3D" unique_id=484234173 node_paths=PackedStringArray("interact_cooldown")]
 script = ExtResource("1_5bhsc")
+interact_cooldown = NodePath("InteractCooldown")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=2129475475]
 layers = 2
@@ -36,5 +39,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6272516)
 shape = SubResource("SphereShape3D_5bhsc")
 debug_color = Color(0.6005939, 0.543645, 1.92523e-07, 0.41960785)
 
+[node name="InteractCooldown" type="Timer" parent="." unique_id=203810968]
+wait_time = 0.5
+one_shot = true
+
+[node name="Hurtbox" type="Area3D" parent="." unique_id=1299172002]
+collision_layer = 2
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" unique_id=419814668]
+shape = SubResource("BoxShape3D_5bhsc")
+
 [connection signal="area_entered" from="Yaw/Pitch/InteractionBox" to="." method="_on_interaction_box_area_entered"]
 [connection signal="area_exited" from="Yaw/Pitch/InteractionBox" to="." method="_on_interaction_box_area_exited"]
+[connection signal="timeout" from="InteractCooldown" to="." method="_on_interact_cooldown_timeout"]

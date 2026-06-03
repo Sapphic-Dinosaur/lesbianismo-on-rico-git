@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://dxo3ilfgjx5dx"]
 
+[ext_resource type="Script" uid="uid://drmhq6s1amp01" path="res://scenes/levels/proto_level.gd" id="1_m550k"]
 [ext_resource type="Script" uid="uid://c1b11kwi63lv0" path="res://scripts/pause_handler.gd" id="1_m6160"]
 [ext_resource type="PackedScene" uid="uid://b7dk6evx4s7b1" path="res://scenes/player/lesbian.tscn" id="2_o3vtb"]
+[ext_resource type="Material" uid="uid://b3kqwsd24aurt" path="res://materials/panel_cube_debug.tres" id="2_tqd7r"]
 [ext_resource type="PackedScene" uid="uid://dovl7f3ubfh66" path="res://scenes/components/interaction_box.tscn" id="3_0pugu"]
 [ext_resource type="Script" uid="uid://kc1emi83qalu" path="res://scripts/objects/Numpad_panel.gd" id="4_7ic40"]
 
@@ -12,9 +14,6 @@ size = Vector3(4.9515686, 0.083618164, 5.0048523)
 
 [sub_resource type="BoxMesh" id="BoxMesh_o3vtb"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o3vtb"]
-albedo_color = Color(0.16470589, 1, 0.16078432, 1)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_0pugu"]
 size = Vector3(0.4008789, 0.4257202, 0.39154053)
 
@@ -24,9 +23,15 @@ radius = 0.5981279
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o3vtb"]
 size = Vector2(30, 50)
 
-[node name="Proto level" type="Node" unique_id=781541328]
+[sub_resource type="BoxShape3D" id="BoxShape3D_tqd7r"]
+size = Vector3(225.43085, 17.313354, 207.06195)
 
-[node name="Label" type="Label" parent="." unique_id=1182705079]
+[node name="Proto level" type="Node" unique_id=781541328 node_paths=PackedStringArray("player", "respawn_point")]
+script = ExtResource("1_m550k")
+player = NodePath("Lesbian")
+respawn_point = NodePath("Respawn")
+
+[node name="InteractText" type="Label" parent="." unique_id=1182705079]
 visible = false
 anchors_preset = 7
 anchor_left = 0.5
@@ -47,54 +52,54 @@ process_mode = 3
 script = ExtResource("1_m6160")
 player = NodePath("../Lesbian")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1467795767]
+[node name="staticbodies" type="Node" parent="." unique_id=1581221833]
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="StaticBody3D" unique_id=1330039862]
+[node name="StaticBody3D" type="StaticBody3D" parent="staticbodies" unique_id=1467795767]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="staticbodies/StaticBody3D" unique_id=1330039862]
 transform = Transform3D(5, 0, 0, 0, 0.1, 0, 0, 0, 5, 0, 0, 0)
 mesh = SubResource("BoxMesh_m6160")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=650239333]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="staticbodies/StaticBody3D" unique_id=650239333]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018936157, 0.0079956055, -0.006088257)
 shape = SubResource("BoxShape3D_o3vtb")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=941001215]
+[node name="StaticBody3D2" type="StaticBody3D" parent="staticbodies" unique_id=941001215]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4707055, 0.09947407, 0)
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="StaticBody3D2" unique_id=1515939868]
+[node name="CSGMesh3D" type="CSGMesh3D" parent="staticbodies/StaticBody3D2" unique_id=1515939868]
 transform = Transform3D(5, 0, 0, 0, 0.1, 0, 0, 0, 5, 0, 0, 0)
 mesh = SubResource("BoxMesh_m6160")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=1034144735]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="staticbodies/StaticBody3D2" unique_id=1034144735]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018936157, 0.0079956055, -0.006088257)
 shape = SubResource("BoxShape3D_o3vtb")
 
-[node name="Lesbian" parent="." unique_id=484234173 node_paths=PackedStringArray("interactText") instance=ExtResource("2_o3vtb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.93012434, 1.0498046, -1.073791)
-interactText = NodePath("../Label")
+[node name="interaction objects" type="Node" parent="." unique_id=909046832]
 
-[node name="StaticBody3D3" type="StaticBody3D" parent="." unique_id=939252039]
+[node name="StaticBody3D3" type="StaticBody3D" parent="interaction objects" unique_id=939252039]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1627007, 1.7696536, 0)
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="StaticBody3D3" unique_id=1142598925]
+[node name="PanelCube" type="CSGMesh3D" parent="interaction objects/StaticBody3D3" unique_id=1142598925]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 mesh = SubResource("BoxMesh_o3vtb")
-material = SubResource("StandardMaterial3D_o3vtb")
+material = ExtResource("2_tqd7r")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3" unique_id=238665110]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="interaction objects/StaticBody3D3" unique_id=238665110]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010009766, -0.0030212402, 0.0027770996)
 shape = SubResource("BoxShape3D_0pugu")
 
-[node name="InteractionBox" parent="StaticBody3D3" unique_id=1760234678 node_paths=PackedStringArray("display") instance=ExtResource("3_0pugu")]
+[node name="InteractionBoxNumpad" parent="interaction objects/StaticBody3D3" unique_id=1760234678 node_paths=PackedStringArray("display") instance=ExtResource("3_0pugu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3840742, 0, 0)
 display = NodePath("../Interaction Canvas/Control")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3/InteractionBox" unique_id=240710124]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="interaction objects/StaticBody3D3/InteractionBoxNumpad" unique_id=240710124]
 shape = SubResource("SphereShape3D_0pugu")
 debug_color = Color(0.645169, 0.52270925, 0, 0.41960785)
 
-[node name="Interaction Canvas" type="CanvasLayer" parent="StaticBody3D3" unique_id=1231936780]
+[node name="Interaction Canvas" type="CanvasLayer" parent="interaction objects/StaticBody3D3" unique_id=1231936780]
 
-[node name="Control" type="Control" parent="StaticBody3D3/Interaction Canvas" unique_id=1666561016 node_paths=PackedStringArray("result")]
+[node name="Control" type="Control" parent="interaction objects/StaticBody3D3/Interaction Canvas" unique_id=1666561016 node_paths=PackedStringArray("result", "player", "interaction_box", "panel_cube")]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -104,8 +109,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_7ic40")
 result = NodePath("VBoxContainer/Label")
+player = NodePath("../../../../Lesbian")
+interaction_box = NodePath("../../InteractionBoxNumpad")
+panel_cube = NodePath("../../PanelCube")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="StaticBody3D3/Interaction Canvas/Control" unique_id=696747202]
+[node name="VBoxContainer" type="VBoxContainer" parent="interaction objects/StaticBody3D3/Interaction Canvas/Control" unique_id=696747202]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -120,97 +128,120 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="StaticBody3D3/Interaction Canvas/Control/VBoxContainer" unique_id=530376021]
+[node name="Label" type="Label" parent="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer" unique_id=530376021]
 layout_mode = 2
 theme_override_font_sizes/font_size = 70
 text = "000"
 horizontal_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="StaticBody3D3/Interaction Canvas/Control/VBoxContainer" unique_id=1315289906]
+[node name="GridContainer" type="GridContainer" parent="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer" unique_id=1315289906]
 layout_mode = 2
 size_flags_horizontal = 4
 columns = 3
 
-[node name="Button7" type="Button" parent="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=823279318]
+[node name="Button7" type="Button" parent="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=823279318]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "7"
 
-[node name="Button8" type="Button" parent="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=615625297]
+[node name="Button8" type="Button" parent="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=615625297]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "8"
 
-[node name="Button9" type="Button" parent="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=1520518373]
+[node name="Button9" type="Button" parent="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=1520518373]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "9"
 
-[node name="Button4" type="Button" parent="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=919521281]
+[node name="Button4" type="Button" parent="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=919521281]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "4"
 
-[node name="Button5" type="Button" parent="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=115947127]
+[node name="Button5" type="Button" parent="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=115947127]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "5"
 
-[node name="Button6" type="Button" parent="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=1668534089]
+[node name="Button6" type="Button" parent="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=1668534089]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "6"
 
-[node name="Button1" type="Button" parent="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=1330453766]
+[node name="Button1" type="Button" parent="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=1330453766]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "1"
 
-[node name="Button2" type="Button" parent="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=1805933051]
+[node name="Button2" type="Button" parent="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=1805933051]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "2"
 
-[node name="Button3" type="Button" parent="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=520695453]
+[node name="Button3" type="Button" parent="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=520695453]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "3"
 
-[node name="Panel" type="Panel" parent="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=1703411375]
+[node name="Panel" type="Panel" parent="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=1703411375]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="Button0" type="Button" parent="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=2143369752]
+[node name="Button0" type="Button" parent="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=2143369752]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "0
 "
 
-[node name="ButtonEnter" type="Button" parent="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=1127754800]
+[node name="ButtonEnter" type="Button" parent="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=1127754800]
 layout_mode = 2
 text = "
 "
 icon = SubResource("PlaceholderTexture2D_o3vtb")
 icon_alignment = 1
 
-[node name="Label2" type="Label" parent="StaticBody3D3/Interaction Canvas/Control/VBoxContainer" unique_id=570272534]
+[node name="Label2" type="Label" parent="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer" unique_id=570272534]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Press E or F to confirm"
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1425765816]
-transform = Transform3D(0.7273776, 0.42716473, -0.5370774, 0, 0.78264076, 0.62247366, 0.68623745, -0.4527734, 0.5692753, 0, 5.128899, 4.4034033)
+[node name="Lesbian" parent="." unique_id=484234173 node_paths=PackedStringArray("interact_text") instance=ExtResource("2_o3vtb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.93012434, 1.0498046, -1.073791)
+interact_text = NodePath("../InteractText")
 
-[connection signal="button_down" from="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button7" to="StaticBody3D3/Interaction Canvas/Control" method="_on_button_7_button_down"]
-[connection signal="button_down" from="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button8" to="StaticBody3D3/Interaction Canvas/Control" method="_on_button_8_button_down"]
-[connection signal="button_down" from="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button9" to="StaticBody3D3/Interaction Canvas/Control" method="_on_button_9_button_down"]
-[connection signal="button_down" from="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button4" to="StaticBody3D3/Interaction Canvas/Control" method="_on_button_4_button_down"]
-[connection signal="button_down" from="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button5" to="StaticBody3D3/Interaction Canvas/Control" method="_on_button_5_button_down"]
-[connection signal="button_down" from="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button6" to="StaticBody3D3/Interaction Canvas/Control" method="_on_button_6_button_down"]
-[connection signal="button_down" from="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button1" to="StaticBody3D3/Interaction Canvas/Control" method="_on_button_1_button_down"]
-[connection signal="button_down" from="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button2" to="StaticBody3D3/Interaction Canvas/Control" method="_on_button_2_button_down"]
-[connection signal="button_down" from="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button3" to="StaticBody3D3/Interaction Canvas/Control" method="_on_button_3_button_down"]
-[connection signal="button_down" from="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button0" to="StaticBody3D3/Interaction Canvas/Control" method="_on_button_0_button_down"]
-[connection signal="button_down" from="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/ButtonEnter" to="StaticBody3D3/Interaction Canvas/Control" method="_on_button_enter_button_down"]
+[node name="Light" type="Node" parent="." unique_id=1251808288]
 
-[editable path="StaticBody3D3/InteractionBox"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Light" unique_id=1425765816]
+transform = Transform3D(0.7273776, 0.42716476, -0.5370774, 0, 0.78264076, 0.62247366, 0.68623745, -0.45277336, 0.5692753, 0, 5.128899, 4.4034033)
+light_color = Color(1, 0.5568628, 1, 1)
+light_energy = 0.7
+light_volumetric_fog_energy = 0.0
+light_specular = 2.0
+light_bake_mode = 1
+
+[node name="Fallstopper" type="Area3D" parent="." unique_id=521881713]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -132.56302, 0)
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Fallstopper" unique_id=1911729813]
+shape = SubResource("BoxShape3D_tqd7r")
+
+[node name="Respawn" type="Marker3D" parent="." unique_id=1848950025]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 92.35721, 0)
+
+[connection signal="button_down" from="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button7" to="interaction objects/StaticBody3D3/Interaction Canvas/Control" method="_on_button_7_button_down"]
+[connection signal="button_down" from="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button8" to="interaction objects/StaticBody3D3/Interaction Canvas/Control" method="_on_button_8_button_down"]
+[connection signal="button_down" from="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button9" to="interaction objects/StaticBody3D3/Interaction Canvas/Control" method="_on_button_9_button_down"]
+[connection signal="button_down" from="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button4" to="interaction objects/StaticBody3D3/Interaction Canvas/Control" method="_on_button_4_button_down"]
+[connection signal="button_down" from="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button5" to="interaction objects/StaticBody3D3/Interaction Canvas/Control" method="_on_button_5_button_down"]
+[connection signal="button_down" from="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button6" to="interaction objects/StaticBody3D3/Interaction Canvas/Control" method="_on_button_6_button_down"]
+[connection signal="button_down" from="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button1" to="interaction objects/StaticBody3D3/Interaction Canvas/Control" method="_on_button_1_button_down"]
+[connection signal="button_down" from="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button2" to="interaction objects/StaticBody3D3/Interaction Canvas/Control" method="_on_button_2_button_down"]
+[connection signal="button_down" from="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button3" to="interaction objects/StaticBody3D3/Interaction Canvas/Control" method="_on_button_3_button_down"]
+[connection signal="button_down" from="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button0" to="interaction objects/StaticBody3D3/Interaction Canvas/Control" method="_on_button_0_button_down"]
+[connection signal="button_down" from="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/ButtonEnter" to="interaction objects/StaticBody3D3/Interaction Canvas/Control" method="_on_button_enter_button_down"]
+[connection signal="area_entered" from="Fallstopper" to="." method="_on_fallstopper_area_entered"]
+
+[editable path="interaction objects/StaticBody3D3/InteractionBoxNumpad"]
