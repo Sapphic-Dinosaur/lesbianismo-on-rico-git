@@ -26,7 +26,9 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 	#Movement. Player can only move if they're not in the midle of an interaction.
 	if !player_interacting: _movement()
+	#Interactions
 	_interaction()
+	#THE MIGHTY ONE
 	move_and_slide()
 
 func _movement():
@@ -37,16 +39,18 @@ func _movement():
 	if direction: velocity = Vector3(direction.x * SPEED, velocity.y, direction.z * SPEED)
 	else: velocity = Vector3(0, velocity.y, 0)
 
-func _interaction():
+func _interaction(): #This handles
 	if Input.is_action_just_pressed("play_interact") and possible_interaction and !player_interacting:
-		print("Yea")
 		possible_interaction.display.visible = true
 		player_interacting = true
+		interactText.visible = false
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	elif Input.is_action_just_pressed("play_confirm") and player_interacting:
 		possible_interaction.display.visible = false
 		player_interacting = false
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		interactText.visible = true
+		possible_interaction.display.interaction_confirmed()
 
 func _unhandled_input(event: InputEvent):
 	if event is InputEventMouseMotion:
@@ -58,11 +62,9 @@ func _capture_mouse(pause: bool):
 	if !pause: Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	else: Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-
 func _on_interaction_box_area_entered(area: Interaction_box) -> void:
 	interactText.visible = true
 	possible_interaction = area
-
 
 func _on_interaction_box_area_exited(area: Interaction_box) -> void:
 	interactText.visible = false

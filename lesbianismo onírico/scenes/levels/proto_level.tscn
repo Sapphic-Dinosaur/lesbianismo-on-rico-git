@@ -128,6 +128,7 @@ horizontal_alignment = 1
 
 [node name="GridContainer" type="GridContainer" parent="StaticBody3D3/Interaction Canvas/Control/VBoxContainer" unique_id=1315289906]
 layout_mode = 2
+size_flags_horizontal = 4
 columns = 3
 
 [node name="Button7" type="Button" parent="StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer" unique_id=823279318]
@@ -191,6 +192,11 @@ text = "
 "
 icon = SubResource("PlaceholderTexture2D_o3vtb")
 icon_alignment = 1
+
+[node name="Label2" type="Label" parent="StaticBody3D3/Interaction Canvas/Control/VBoxContainer" unique_id=570272534]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Press E or F to confirm"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1425765816]
 transform = Transform3D(0.7273776, 0.42716473, -0.5370774, 0, 0.78264076, 0.62247366, 0.68623745, -0.4527734, 0.5692753, 0, 5.128899, 4.4034033)

@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="lesbianas oniricas"
+config/tags=PackedStringArray("3d", "first_person", "game", "platformer", "puzzles")
 run/main_scene="uid://dxo3ilfgjx5dx"
 config/features=PackedStringArray("4.6", "Mobile")
 

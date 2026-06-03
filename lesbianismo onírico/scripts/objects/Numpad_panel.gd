@@ -1,4 +1,4 @@
-extends Control
+extends Interaction_object
 
 @export var result: Label
 var writen_nums: int
@@ -40,5 +40,11 @@ func _on_button_9_button_down() -> void:
 func _on_button_enter_button_down() -> void:
 	_check_result()
 
+func interaction_confirmed():
+	_check_result()
+
 func _check_result() -> void:
-	if result.text == "451": print("Done")
+	if result.text == "451":
+		result.text = "000"
+		print("Done")
+	else: result.text = "000"
