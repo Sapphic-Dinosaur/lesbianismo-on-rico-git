@@ -6,11 +6,29 @@
 [ext_resource type="Material" uid="uid://b3kqwsd24aurt" path="res://materials/panel_cube_debug.tres" id="2_tqd7r"]
 [ext_resource type="PackedScene" uid="uid://dovl7f3ubfh66" path="res://scenes/components/interaction_box.tscn" id="3_0pugu"]
 [ext_resource type="Script" uid="uid://kc1emi83qalu" path="res://scripts/objects/Numpad_panel.gd" id="4_7ic40"]
+[ext_resource type="PackedScene" uid="uid://cb0r6d5g2bts4" path="res://scenes/platforms/moving_platform.tscn" id="6_sa64y"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_m6160"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o3vtb"]
 size = Vector3(4.9515686, 0.083618164, 5.0048523)
+
+[sub_resource type="BoxMesh" id="BoxMesh_sa64y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5ouw5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5ouw5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_knptv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_m550k"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sa64y"]
+size = Vector3(1, 0.984375, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_knptv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hmhrr"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_o3vtb"]
 
@@ -74,6 +92,57 @@ mesh = SubResource("BoxMesh_m6160")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="staticbodies/StaticBody3D2" unique_id=1034144735]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018936157, 0.0079956055, -0.006088257)
 shape = SubResource("BoxShape3D_o3vtb")
+
+[node name="Slope-50" type="StaticBody3D" parent="staticbodies" unique_id=1366888838]
+transform = Transform3D(1, 0, 0, 0, 0.06427877, 3.8302221, 0, -0.07660445, 3.2139382, -1.9852235, 1.8390322, 4.0656757)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="staticbodies/Slope-50" unique_id=954400724]
+mesh = SubResource("BoxMesh_sa64y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="staticbodies/Slope-50" unique_id=1079985047]
+shape = SubResource("BoxShape3D_5ouw5")
+
+[node name="Slope-45" type="StaticBody3D" parent="staticbodies" unique_id=97653455]
+transform = Transform3D(1, 0, 0, 0, 0.07071068, 3.535534, 0, -0.07071068, 3.535534, -0.86163855, 1.7677497, 4.2890997)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="staticbodies/Slope-45" unique_id=1437470977]
+mesh = SubResource("BoxMesh_5ouw5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="staticbodies/Slope-45" unique_id=1504870546]
+shape = SubResource("BoxShape3D_knptv")
+
+[node name="Label3D" type="Label3D" parent="staticbodies/Slope-45" unique_id=1523941817]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7750673, 0.05550134)
+billboard = 1
+text = "Max Slope"
+
+[node name="Platform lenght" type="StaticBody3D" parent="staticbodies" unique_id=291265213]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0215366, 0, 7.6797667)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="staticbodies/Platform lenght" unique_id=1215747402]
+mesh = SubResource("BoxMesh_m550k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="staticbodies/Platform lenght" unique_id=2108290966]
+shape = SubResource("BoxShape3D_sa64y")
+
+[node name="Label3D" type="Label3D" parent="staticbodies/Platform lenght" unique_id=2100739229]
+transform = Transform3D(-0.99736154, 0, 0.07259406, 0, 1, 0, -0.07259406, 0, -0.99736154, 0, 0.8682431, 0)
+billboard = 1
+text = "Max Lenght"
+
+[node name="Platform height" type="StaticBody3D" parent="staticbodies" unique_id=699172551]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3754816, 0.7855295, 0.8048723)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="staticbodies/Platform height" unique_id=1109664595]
+mesh = SubResource("BoxMesh_knptv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="staticbodies/Platform height" unique_id=602013770]
+shape = SubResource("BoxShape3D_hmhrr")
+
+[node name="Label3D" type="Label3D" parent="staticbodies/Platform height" unique_id=1211426337]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7155272, 0)
+billboard = 1
+text = "Max Height"
 
 [node name="interaction objects" type="Node" parent="." unique_id=909046832]
 
@@ -205,6 +274,23 @@ icon_alignment = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Press E or F to confirm"
+
+[node name="Moving platforms" type="Node" parent="." unique_id=1300523170]
+
+[node name="horizontal" parent="Moving platforms" unique_id=2098614238 instance=ExtResource("6_sa64y")]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -1, 0, -4)
+a = Vector3(-1, 0, -4)
+b = Vector3(-1, 0, -10)
+
+[node name="vertical" parent="Moving platforms" unique_id=81297247 instance=ExtResource("6_sa64y")]
+transform = Transform3D(1, 0, 0, 0, 0.010000001, 0, 0, 0, 1, -1, 5, -13)
+a = Vector3(-1, 5, -13)
+b = Vector3(-1, 0, -13)
+
+[node name="diagonal" parent="Moving platforms" unique_id=763519946 instance=ExtResource("6_sa64y")]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 2, 0, -4)
+a = Vector3(2, 0, -4)
+b = Vector3(2, 5, -13)
 
 [node name="Lesbian" parent="." unique_id=484234173 node_paths=PackedStringArray("interact_text") instance=ExtResource("2_o3vtb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.93012434, 1.0498046, -1.073791)
