@@ -41,13 +41,56 @@ radius = 0.5981279
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o3vtb"]
 size = Vector2(30, 50)
 
+[sub_resource type="BoxMesh" id="BoxMesh_hmhrr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0vl5m"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_tqd7r"]
 size = Vector3(225.43085, 17.313354, 207.06195)
 
-[node name="Proto level" type="Node" unique_id=781541328 node_paths=PackedStringArray("player", "respawn_point")]
+[sub_resource type="Animation" id="Animation_sa64y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Moving platforms/AnimatableBody3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-3, 0, -2)]
+}
+
+[sub_resource type="Animation" id="Animation_5ouw5"]
+resource_name = "moving platform"
+length = 5.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Moving platforms/AnimatableBody3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 2.7, 3.4, 5.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-3, 0, -2), Vector3(-3, 0, -2), Vector3(-3, -5, -2), Vector3(-3, -5, -2), Vector3(-3, 0, -2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_knptv"]
+_data = {
+&"RESET": SubResource("Animation_sa64y"),
+&"moving platform": SubResource("Animation_5ouw5")
+}
+
+[node name="Proto level" type="Node" unique_id=781541328 node_paths=PackedStringArray("player", "respawn_point", "animation")]
 script = ExtResource("1_m550k")
 player = NodePath("Lesbian")
 respawn_point = NodePath("Respawn")
+animation = NodePath("AnimationPlayer")
 
 [node name="InteractText" type="Label" parent="." unique_id=1182705079]
 visible = false
@@ -292,6 +335,15 @@ transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 2, 0, -4)
 a = Vector3(2, 0, -4)
 b = Vector3(2, 5, -13)
 
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="Moving platforms" unique_id=1070694874]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -3, 0, -2)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Moving platforms/AnimatableBody3D" unique_id=1025800663]
+mesh = SubResource("BoxMesh_hmhrr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Moving platforms/AnimatableBody3D" unique_id=2085982536]
+shape = SubResource("BoxShape3D_0vl5m")
+
 [node name="Lesbian" parent="." unique_id=484234173 node_paths=PackedStringArray("interact_text") instance=ExtResource("2_o3vtb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.93012434, 1.0498046, -1.073791)
 interact_text = NodePath("../InteractText")
@@ -316,6 +368,9 @@ shape = SubResource("BoxShape3D_tqd7r")
 
 [node name="Respawn" type="Marker3D" parent="." unique_id=1848950025]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 92.35721, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1467085536]
+libraries/ = SubResource("AnimationLibrary_knptv")
 
 [connection signal="button_down" from="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button7" to="interaction objects/StaticBody3D3/Interaction Canvas/Control" method="_on_button_7_button_down"]
 [connection signal="button_down" from="interaction objects/StaticBody3D3/Interaction Canvas/Control/VBoxContainer/GridContainer/Button8" to="interaction objects/StaticBody3D3/Interaction Canvas/Control" method="_on_button_8_button_down"]
